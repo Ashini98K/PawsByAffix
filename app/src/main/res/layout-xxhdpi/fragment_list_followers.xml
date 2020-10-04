@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ListFollowersFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:id="@+id/topLayer"
+            android:layout_width="wrap_content"
+            android:layout_height="109dp"
+
+            android:layout_marginTop="8dp">
+
+
+            <TextView
+                android:id="@+id/searchTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Search"
+                android:gravity="left"
+                android:textSize="15sp"
+                android:padding="15dp"
+                />
+
+
+            <RelativeLayout
+                android:id="@+id/rr1"
+                android:layout_toRightOf="@+id/searchTxt"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/search_board"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="20dp"
+                >
+
+
+                <ImageView
+                   android:layout_alignParentEnd="true"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:paddingLeft="10dp"
+                    android:src="@drawable/ic_search"/>
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_toLeftOf="@+id/rr3_1"
+                android:id="@+id/rr2"
+                android:layout_below="@+id/rr1"
+                android:layout_width="210dp"
+                android:layout_height="40dp"
+                android:background="@drawable/all_boarders"
+                android:layout_marginTop="15dp">
+
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Followers"
+                    android:gravity="center"
+                    android:textStyle="bold"/>
+
+
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/rr3"
+                android:layout_below="@+id/rr1"
+               android:layout_alignParentRight="true"
+                android:layout_width="210dp"
+                android:layout_height="40dp"
+                android:background="@drawable/all_boarders"
+                android:layout_marginTop="15dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Following"
+                    android:gravity="center"/>
+
+
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recview_list_followers"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+
+
+
+</FrameLayout>

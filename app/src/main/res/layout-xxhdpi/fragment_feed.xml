@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".FeedFragment">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#FFFFFF"
+            app:contentScrim="#FFFFFF"
+            app:expandedTitleMarginStart="1dp"
+
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
+
+            <androidx.appcompat.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_collapseMode="parallax"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+                <RelativeLayout
+                    android:id="@+id/upload_post_rel"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <RelativeLayout
+                        android:id="@+id/topLayer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bottom_boarder">
+
+
+                        <RelativeLayout
+                            android:layout_marginTop="5dp"
+                            android:id="@+id/posttxtrel"
+                            android:layout_below="@+id/selected_image"
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginEnd="10dp"
+                            >
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                android:id="@+id/feedprofileimage"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:src="@drawable/defaultprofileimage"/>
+
+
+                            <RelativeLayout
+
+                                android:paddingLeft="10dp"
+                                android:id="@+id/postcaptionTxt"
+                                android:layout_width="match_parent"
+                                android:layout_toRightOf="@id/feedprofileimage"
+                                android:background="@drawable/search_board"
+                                android:layout_height="25dp"
+                                android:layout_marginStart="10dp">
+                                <TextView
+                                    android:layout_centerInParent="true"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Enter your caption here.........."
+                                    />
+                            </RelativeLayout>
+
+
+
+                        </RelativeLayout>
+
+
+                    </RelativeLayout>
+                </RelativeLayout>
+            </LinearLayout>
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/feedrecview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

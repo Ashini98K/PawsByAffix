@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent" android:layout_height="wrap_content">
+<RelativeLayout
+    android:id="@+id/self_relative"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:id="@+id/msgrightrel1"
+        android:layout_alignParentRight="true"
+        android:layout_width="230dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="5dp"
+        android:layout_height="wrap_content"
+        android:minHeight="40dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/message_right">
+        <TextView
+            android:id="@+id/rightmsgtxt"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:maxWidth="200dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:text="Message here"/>
+
+
+
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/selftime"
+        android:layout_marginTop="0dp"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:text="20 09,2020"
+        android:layout_below="@+id/msgrightrel1"
+        android:layout_marginRight="10dp"
+        android:textSize="12sp"
+        android:textColor="#333232"
+        android:layout_alignParentRight="true"/>
+</RelativeLayout>
+
+
+
+
+
+<!--    friend area-->
+    <RelativeLayout
+        android:id="@+id/friend_relative"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/msgProfileImage"
+            android:layout_width="50dp"
+            android:src="@drawable/defaultprofileimage"
+            android:layout_height="50dp"/>
+
+
+        <RelativeLayout
+            android:layout_toRightOf="@+id/msgProfileImage"
+            android:id="@+id/msgrightrel"
+            android:layout_width="230dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="5dp"
+            android:layout_height="wrap_content"
+            android:minHeight="40dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/message_left">
+            <TextView
+                android:id="@+id/leftmsgtxt"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+
+                android:layout_centerVertical="true"
+                android:layout_width="match_parent"
+                android:maxWidth="200dp"
+                android:textAlignment="viewEnd"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:text="Message here Message "/>
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/friendtime"
+            android:layout_marginTop="0dp"
+            android:paddingTop="0dp"
+            android:layout_toRightOf="@+id/msgProfileImage"
+            android:paddingBottom="0dp"
+            android:layout_width="wrap_content"
+            android:layout_below="@+id/msgrightrel"
+            android:layout_height="20dp"
+            android:text="20 09,2020"
+            android:layout_marginLeft="15dp"
+            android:textSize="12sp"
+            android:textColor="#615E5E"
+            />
+
+
+
+    </RelativeLayout>
+
+
+
+</RelativeLayout>

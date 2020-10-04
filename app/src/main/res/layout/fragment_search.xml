@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SearchFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/topLayer_search"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:background="@drawable/bottom_boarder"
+            android:layout_marginTop="8dp">
+
+
+            <TextView
+                android:id="@+id/searchTxt_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:padding="15dp"
+                android:text="Search"
+                android:textSize="15sp" />
+
+
+            <RelativeLayout
+                android:id="@+id/rr1_search"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="20dp"
+                android:layout_toRightOf="@+id/searchTxt_search"
+                android:background="@drawable/search_board">
+
+                <EditText
+                    android:id="@+id/searchEdtTxt_search"
+                    android:layout_width="200dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="2dp" />
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_toRightOf="@id/searchEdtTxt_search"
+                    android:paddingLeft="10dp"
+                    android:src="@drawable/ic_search" />
+
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recview_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Search  Fragment"
+        android:gravity="center"
+        android:textSize="40sp"
+        />
+
+
+</RelativeLayout>

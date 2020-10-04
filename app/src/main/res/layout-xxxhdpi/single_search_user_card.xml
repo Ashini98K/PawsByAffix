@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="90dp"
+    android:background="@color/white"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardUseCompatPadding="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_gravity="left"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/search_profileimage"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            app:civ_border_width="1dp"
+            app:civ_border_color="#3D4143"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/defaultprofileimage"
+            android:layout_marginBottom="5dp"/>
+
+        <LinearLayout
+            android:layout_toEndOf="@+id/search_profileimage"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/searchusername"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:layout_toRightOf="@+id/followers_s_card_image"
+                android:text="username"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:paddingLeft="20dp"
+                android:textSize="16sp"
+                android:gravity="left"/>
+            <TextView
+                android:id="@+id/searchfullname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:layout_toRightOf="@+id/followers_s_card_image"
+                android:text="Fullname"
+
+                android:paddingLeft="20dp"
+                android:textSize="16sp"
+                android:gravity="left"/>
+
+
+
+
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/followbtn"
+                android:layout_width="100dp"
+                android:layout_height="35dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/blue_button"
+                android:onClick="onClickflw"
+                android:text="Follow"
+                android:textColor="#ffff"
+                android:textSize="10sp" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/uidtxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/followers_s_card_image"
+            android:visibility="invisible"
+            android:gravity="left"/>
+
+        <TextView
+            android:id="@+id/biosearchtxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/followers_s_card_image"
+            android:visibility="invisible"
+            android:gravity="left"/>
+        <TextView
+            android:id="@+id/emailsearch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/followers_s_card_image"
+            android:visibility="invisible"
+            android:gravity="left"/>
+        <ImageView
+            android:id="@+id/bgimgsearch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/followers_s_card_image"
+            android:visibility="invisible"
+            android:gravity="left"/>
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

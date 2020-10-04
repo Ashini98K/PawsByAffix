@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".UploadActivity">
+
+    <RelativeLayout
+        android:id="@+id/top"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:background="@drawable/bottom_boarder">
+
+        <ImageView
+            android:layout_centerVertical="true"
+            android:id="@+id/backarrow"
+            android:layout_width="50dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_back_arrow"/>
+
+        <TextView
+            android:id="@+id/usernametxtbox"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Back"
+            android:layout_marginLeft="20dp"
+            android:textSize="20sp"
+            android:layout_toRightOf="@+id/backarrow"
+            android:textStyle="bold"
+            android:paddingRight="20dp"/>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/userdetailrel"
+        android:layout_below="@+id/top"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/uploadpostprofileimage"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/defaultprofileimage"/>
+
+        <TextView
+            android:id="@+id/usernametextview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/uploadpostprofileimage"
+            android:text="Username"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="30dp"
+            android:textSize="25sp"/>
+
+    </RelativeLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_below="@id/userdetailrel"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:id="@+id/captionedittxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/userdetailrel"
+                android:background="@drawable/bottom_boarder"
+                >
+                <ImageView
+                    android:id="@+id/selected_image_to_upload"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scaleType="fitCenter"/>
+
+                <EditText
+                    android:layout_below="@+id/selected_image_to_upload"
+                    android:layout_width="match_parent"
+                    android:id="@+id/postcaptionTxt"
+                    android:layout_height="200dp"
+                    android:padding="10dp"
+                    android:hint="Enter post caption here"
+                    />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_marginTop="20dp"
+                android:id="@+id/postrel"
+                android:layout_below="@+id/captionedittxt"
+                android:layout_width="match_parent"
+                android:padding="5dp"
+                android:background="@drawable/bottom_boarder"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/posticon"
+                    android:layout_width="35dp"
+
+                    android:layout_height="35dp"
+                    android:src="@drawable/ic_outline_send_24"/>
+
+
+                <TextView
+                    android:layout_toRightOf="@+id/posticon"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_width="wrap_content"
+
+                    android:textSize="20dp"
+                    android:layout_height="wrap_content"
+                    android:text="Upload post"/>
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_marginTop="20dp"
+                android:id="@+id/galleryiconrel"
+                android:layout_below="@+id/postrel"
+                android:layout_width="match_parent"
+                android:padding="5dp"
+                android:background="@drawable/bottom_boarder"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/galleryicon"
+                    android:layout_width="35dp"
+
+                    android:layout_height="35dp"
+                    android:src="@drawable/ic_outline_image_24"/>
+
+
+                <TextView
+                    android:layout_toRightOf="@+id/galleryicon"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_width="wrap_content"
+
+                    android:textSize="20dp"
+                    android:layout_height="wrap_content"
+                    android:text="Select Image from gallery"/>
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_marginTop="20dp"
+                android:id="@+id/posticonrel"
+                android:layout_below="@+id/galleryiconrel"
+                android:layout_width="match_parent"
+                android:padding="5dp"
+                android:background="@drawable/bottom_boarder"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/cancelicon"
+                    android:layout_width="35dp"
+
+                    android:layout_height="35dp"
+                    android:src="@drawable/ic_outline_cancel_24"/>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_toRightOf="@+id/cancelicon"
+                    android:text="Discard Upload"
+
+                    android:textSize="20dp" />
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
+</RelativeLayout>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="8dp"
+    android:elevation="5dp"
+    app:cardUseCompatPadding="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_gravity="left"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/followers_s_card_image"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/defaultprofileimage"
+            android:layout_marginBottom="5dp"/>
+
+        <LinearLayout
+            android:layout_toEndOf="@+id/followers_s_card_image"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/followers_s_card_user_nametext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:layout_toRightOf="@+id/followers_s_card_image"
+                android:text="user name"
+
+                android:paddingLeft="20dp"
+                android:textSize="16sp"
+                android:gravity="left"/>
+
+            <TextView
+                android:id="@+id/followers_s_card_fullname_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:layout_below="@+id/sa_img1"
+                android:layout_toRightOf="@+id/followers_s_card_image"
+                android:text="Full Name "
+
+                android:paddingLeft="20dp"
+                android:textSize="16sp"
+                android:gravity="left"/>
+
+
+        </LinearLayout>
+
+
+
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
