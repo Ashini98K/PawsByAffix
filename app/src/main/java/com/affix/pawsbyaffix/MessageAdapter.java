@@ -33,8 +33,8 @@ public class MessageAdapter extends FirebaseRecyclerAdapter <MessageModel, Messa
     @Override
     protected void onBindViewHolder(@NonNull final myviewholder holder, int position, @NonNull MessageModel MessageModel) {
         final String Uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
-        DatabaseReference dbref = FirebaseDatabase.getInstance().getReference().child("Chats").child(Uid).child(MessageModel.getParticipant2());
+        String frienduid = MessageModel.getParticipant2();
+        DatabaseReference dbref = FirebaseDatabase.getInstance().getReference().child("Chats").child(Uid).child(frienduid);
 
         dbref.addValueEventListener(new ValueEventListener() {
             @Override
