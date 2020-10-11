@@ -31,6 +31,10 @@ public class VerticelUprofileAdapter extends FirebaseRecyclerAdapter <VerticelUp
     String fuid;
     FirebaseAuth mAuth;
     private String likecount;
+    private String profimage;
+    private String username;
+    private String captionName;
+    private String Fullname;
     private boolean isLiked = false;
     public VerticelUprofileAdapter(@NonNull FirebaseRecyclerOptions<VerticelUprofileModel> options, String fuid) {
         super(options);
@@ -41,9 +45,9 @@ public class VerticelUprofileAdapter extends FirebaseRecyclerAdapter <VerticelUp
     protected void onBindViewHolder(@NonNull final myviewholder holder, int position, @NonNull final VerticelUprofileModel VerticelUprofileModel) {
 
         mAuth = FirebaseAuth.getInstance();
-        holder.captionnames.setText(VerticelUprofileModel.getFullname());
+
         holder.captionnames.setText(VerticelUprofileModel.getUsername());
-        holder.deletebtn.setVisibility(View.VISIBLE);
+
 
         final String postid = VerticelUprofileModel.getPostiddate();
         final String uid = mAuth.getCurrentUser().getUid();
@@ -76,13 +80,29 @@ public class VerticelUprofileAdapter extends FirebaseRecyclerAdapter <VerticelUp
             }
         });
 
+    if(uid.equals(fuid))
+    {
+        holder.deletebtn.setVisibility(View.VISIBLE);
+        username =  Paper.book().read("UserName");
+        profimage = Paper.book().read("ProfileImage");
+        Fullname =  Paper.book().read("FullName");
+        captionName = Paper.book().read("UserName");
+    }
+    else
+        {
 
-        final String username =  Paper.book().read("UserName");
-        final String profimage = Paper.book().read("ProfileImage");
+            holder.deletebtn.setVisibility(View.GONE);
+            username =  Paper.book().read("FriendUserName");
+            profimage = Paper.book().read("FriendProfileImage");
+            Fullname = Paper.book().read("FriendFullName");
+            captionName = Paper.book().read("FriendUserName");
+        }
+
         Glide.with(holder.image.getContext()).load(VerticelUprofileModel.getImage()).into(holder.image);
         holder.likes.setText(String.valueOf(VerticelUprofileModel.getLikes()));
         Glide.with(holder.profileimage.getContext()).load(profimage).into(holder.profileimage);
         holder.username.setText(username);
+        holder.fullnamesingle.setText(Fullname);
         holder.datetime.setText(VerticelUprofileModel.getDatetime());
         holder.caption.setText(VerticelUprofileModel.getCaption());
 
@@ -91,7 +111,6 @@ public class VerticelUprofileAdapter extends FirebaseRecyclerAdapter <VerticelUp
             public void onClick(View view) {
 
                 DatabaseReference dbref = FirebaseDatabase.getInstance().getReference().child("Posts").child(VerticelUprofileModel.getPostiddate());
-
                 dbref.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
@@ -112,24 +131,16 @@ public class VerticelUprofileAdapter extends FirebaseRecyclerAdapter <VerticelUp
             @Override
             public boolean onLongClick(View view) {
 
-
-
                 if(holder.like_image_outline.getVisibility() == view.VISIBLE)
                 {
-
                     holder.like_image_outline.setVisibility(View.INVISIBLE);
                     holder.liked_image_red.setVisibility(View.VISIBLE);
-
                     like(fuid,VerticelUprofileModel.getPostiddate(),uid,username,VerticelUprofileModel.getImage(),profimage);
-
                 }
                 else if (holder.liked_image_red.getVisibility() == view.VISIBLE){
-
                     holder.liked_image_red.setVisibility(View.INVISIBLE);
                     holder.like_image_outline.setVisibility(View.VISIBLE);
-
                     unlike(fuid,VerticelUprofileModel.getPostiddate(),uid);
-
                 }
 
                 return false;
@@ -190,7 +201,6 @@ public class VerticelUprofileAdapter extends FirebaseRecyclerAdapter <VerticelUp
 
         public myviewholder(@NonNull View itemView) {
             super(itemView);
-
 
             image = (ImageView) itemView.findViewById(R.id.post_image);
             liked_image_red = (ImageView) itemView.findViewById(R.id.like_image_red);

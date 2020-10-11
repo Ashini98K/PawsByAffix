@@ -58,7 +58,9 @@ public class EditProfileFragment extends Fragment {
     private Uri imageuri;
     private DatabaseReference DatabaseRefForUserNode;
     private int ImageCode;
-    private String uid,downloadprofileImageUrl,downloadBgImageUrl;
+    private String uid;
+    private String downloadprofileImageUrl = "https://firebasestorage.googleapis.com/v0/b/affixpawsapplication-11331.appspot.com/o/ProfileImages%2Fillustration-cute-dog-avatar_79416-105.jpg?alt=media&token=fb952629-a767-4100-a819-459b6cf3784f";
+    private String downloadBgImageUrl = "https://firebasestorage.googleapis.com/v0/b/affixpawsapplication-11331.appspot.com/o/backgroundImages%2F36a-background-gradients-1600.png?alt=media&token=5111d76c-b65e-435c-a94a-9b56fcee8daa";
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
