@@ -85,6 +85,7 @@ public class VerticelUprofileFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         String friendId = Paper.book().read("FriendUid");
+
         if(friendId != null)
         {
             uid = Paper.book().read("FriendUid");
