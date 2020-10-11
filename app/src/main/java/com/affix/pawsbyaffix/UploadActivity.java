@@ -122,6 +122,7 @@ public class UploadActivity extends AppCompatActivity {
 
         //Use the cropimage method
         CropImage.activity(imageuri)
+                .setAspectRatio(16,9)
                 .start(UploadActivity.this);
     }
 
@@ -152,6 +153,7 @@ public class UploadActivity extends AppCompatActivity {
 
         if(imageuri == null)
         {
+            loadingBar.dismiss();
             Toast.makeText(getApplicationContext(),"Please select a image to post",Toast.LENGTH_LONG);
         }
         else{

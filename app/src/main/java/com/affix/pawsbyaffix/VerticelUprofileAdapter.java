@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -40,6 +41,7 @@ public class VerticelUprofileAdapter extends FirebaseRecyclerAdapter <VerticelUp
     @Override
     protected void onBindViewHolder(@NonNull final myviewholder holder, int position, @NonNull final VerticelUprofileModel VerticelUprofileModel) {
 
+        holder.cardRel.setVisibility(View.VISIBLE);
         mAuth = FirebaseAuth.getInstance();
         holder.captionnames.setText(VerticelUprofileModel.getFullname());
         holder.captionnames.setText(VerticelUprofileModel.getUsername());
@@ -186,6 +188,7 @@ public class VerticelUprofileAdapter extends FirebaseRecyclerAdapter <VerticelUp
 
         ImageView image,profileimage,liked_image_red,like_image_outline;
         TextView username,caption,likes,datetime,deletebtn,fullnamesingle,captionnames;
+        RelativeLayout cardRel;
 
 
         public myviewholder(@NonNull View itemView) {
@@ -198,6 +201,7 @@ public class VerticelUprofileAdapter extends FirebaseRecyclerAdapter <VerticelUp
             profileimage = (ImageView) itemView.findViewById(R.id.circle_profile_image);
             username = (TextView) itemView.findViewById(R.id.usernamesingle);
             caption = (TextView) itemView.findViewById(R.id.caption);
+            cardRel = (RelativeLayout) itemView.findViewById(R.id.relcard);
             fullnamesingle = (TextView) itemView.findViewById(R.id.fullnamesingle);
             captionnames = (TextView) itemView.findViewById(R.id.captionnames);
             likes = (TextView) itemView.findViewById(R.id.like_count);

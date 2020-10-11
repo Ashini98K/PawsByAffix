@@ -116,9 +116,8 @@ public class EditProfileFragment extends Fragment {
         String fullnamepp = Paper.book().read("FullName");
         String usernamepp = Paper.book().read("UserName");
         String biopp = Paper.book().read("Bio");
-
-
         uid = Paper.book().read("Uid");
+
         backgroundImage = (ImageView)getView().findViewById(R.id.bacgroundImageedit);
         profileImage = (ImageView)getView().findViewById(R.id.user_profile_img);
         username = getView().findViewById(R.id.editusername);
@@ -129,6 +128,7 @@ public class EditProfileFragment extends Fragment {
 
         Glide.with(backgroundImage.getContext()).load(bgimg).into(backgroundImage);
         Glide.with(profileImage.getContext()).load(dpimg).into(profileImage);
+
         fullname.setText(fullnamepp);
         username.setText(usernamepp);
         bio.setText(biopp);
@@ -171,7 +171,7 @@ public class EditProfileFragment extends Fragment {
 
     private void openGallery() {
 
-        //Use the cropimage method
+        //Use the crop image method
         CropImage.activity(imageuri)
                 .start(getContext(),this);
     }
@@ -415,8 +415,6 @@ public class EditProfileFragment extends Fragment {
         FirebaseAuth.getInstance().signOut();
         getActivity().finishAndRemoveTask();
         startActivity(new Intent(getActivity().getApplicationContext(),LoginActivity.class));
-
-
     }
 
 

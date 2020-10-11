@@ -455,7 +455,7 @@ public class ProfileFragment extends Fragment {
 
         rootref.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
+            public void onDataChange(@NonNull DataSnapshot snapshot){
                 long followingcount = snapshot.getChildrenCount();
                 String flwing = String.valueOf(followingcount);
                 FollowingCountTextView.setText(flwing);
