@@ -31,13 +31,17 @@ import io.paperdb.Paper;
 
 class myAdapter extends FirebaseRecyclerAdapter<model, myAdapter.myviewholder> {
 
+    private String userIdForPost;
     DatabaseReference databaseReference;
     String fuid;
     int notificationNumber,count;
     FirebaseAuth mAuth;
     private String likecount;
+    private String postDateId;
     private boolean isfollowing =false;
     private boolean isLiked = false;
+    private String postiddate;
+    private String postuserid;
     private boolean notliked = true;
     private String likeCount,firstname,secondname;
 
@@ -67,20 +71,22 @@ class myAdapter extends FirebaseRecyclerAdapter<model, myAdapter.myviewholder> {
 
                         Glide.with(holder.image.getContext()).load(model.getImage()).into(holder.image);
                         holder.image.setScaleType(ImageView.ScaleType.FIT_CENTER);
-                        final String postuserid = model.getUserid();
+                        postuserid = model.getUserid();
                         final String postid = model.getPostiddate();
+                        fuid =  model.getUserid();
                         final String username =  Paper.book().read("UserName");
                         final String postImage = model.getImage();
                         String fullname =  Paper.book().read("FullName");
                         final String profimage = Paper.book().read("ProfileImage");
-                        final String postiddate =  model.getPostiddate();
+                          postiddate =  model.getPostiddate();
 
                         holder.username.setText(model.getUsername());
                         holder.fullname.setText(model.getFullname());
-
+                        holder.postdateid.setText(model.getPostiddate());
                         holder.captionname.setText(model.getUsername());
                         holder.datetime.setText(model.getDatetime());
                         holder.caption.setText(model.getCaption());
+                        holder.useridforpost.setText(model.getUserid());
 
 
                         if(model.getUserid().equals(uid))
@@ -173,7 +179,10 @@ class myAdapter extends FirebaseRecyclerAdapter<model, myAdapter.myviewholder> {
                                     holder.like_image_outline.setVisibility(View.INVISIBLE);
                                     holder.liked_image_red.setVisibility(View.VISIBLE);
                                     notliked = false;
-                                    like(fuid,postiddate,uid,username,postImage,profimage);
+                                    postDateId = holder.postdateid.getText().toString();
+                                    userIdForPost = holder.useridforpost.getText().toString();
+
+                                    like(userIdForPost,postDateId,uid,username,postImage,profimage);
 
                                 }
                                 else if (holder.liked_image_red.getVisibility() == view.VISIBLE){
@@ -181,7 +190,9 @@ class myAdapter extends FirebaseRecyclerAdapter<model, myAdapter.myviewholder> {
                                     holder.liked_image_red.setVisibility(View.INVISIBLE);
                                     holder.like_image_outline.setVisibility(View.VISIBLE);
                                     notliked = true;
-                                    unlike(fuid,postiddate,uid);
+                                    postDateId = holder.postdateid.getText().toString();
+                                    userIdForPost = holder.useridforpost.getText().toString();
+                                    unlike(userIdForPost,postDateId,uid);
 
                                 }
 
@@ -198,7 +209,9 @@ class myAdapter extends FirebaseRecyclerAdapter<model, myAdapter.myviewholder> {
                                     holder.liked_image_red.setVisibility(View.VISIBLE);
                                     holder.like_image_outline.setVisibility(View.INVISIBLE);
                                     notliked = false;
-                                    like(fuid, postiddate, uid, username, postImage, profimage);
+                                    postDateId = holder.postdateid.getText().toString();
+                                    userIdForPost = holder.useridforpost.getText().toString();
+                                    like(userIdForPost, postDateId, uid, username, postImage, profimage);
                                 }
                             }
                         });
@@ -214,7 +227,9 @@ class myAdapter extends FirebaseRecyclerAdapter<model, myAdapter.myviewholder> {
                                     holder.liked_image_red.setVisibility(View.INVISIBLE);
 
                                     notliked = true;
-                                    unlike(fuid,postiddate,uid);
+                                    postDateId = holder.postdateid.getText().toString();
+                                    userIdForPost = holder.useridforpost.getText().toString();
+                                    unlike(userIdForPost,postDateId,uid);
                                 }
                             }
                         });
@@ -245,7 +260,7 @@ class myAdapter extends FirebaseRecyclerAdapter<model, myAdapter.myviewholder> {
     public class myviewholder extends RecyclerView.ViewHolder{
 
         ImageView image,profileimage,liked_image_red,like_image_outline;
-        TextView username,caption,likes,datetime,fullname,captionname,deletebtn;
+        TextView username,caption,likes,datetime,fullname,captionname,deletebtn,useridforpost,postdateid;
         RelativeLayout cardRel;
 
         public myviewholder(@NonNull View itemView) {
@@ -264,6 +279,8 @@ class myAdapter extends FirebaseRecyclerAdapter<model, myAdapter.myviewholder> {
             caption = (TextView) itemView.findViewById(R.id.caption);
             likes = (TextView) itemView.findViewById(R.id.like_count);
             datetime = (TextView) itemView.findViewById(R.id.datettime);
+            useridforpost = (TextView) itemView.findViewById(R.id.userIdforpost);
+            postdateid = (TextView) itemView.findViewById(R.id.postdateid);
 
         }
 
@@ -273,6 +290,7 @@ class myAdapter extends FirebaseRecyclerAdapter<model, myAdapter.myviewholder> {
     public int getItemCount() {
         return super.getItemCount();
     }
+
 
 
 
@@ -359,22 +377,15 @@ class myAdapter extends FirebaseRecyclerAdapter<model, myAdapter.myviewholder> {
                                     public void onCancelled(@NonNull DatabaseError error) {
                                     }
                                 });
-
-
                             }
                         }
                     });
 
 
-
-
                 }
-
             }
         });
     }
-
-    //remove unlike
 
     public void unlike(final String uidforpost, final String datetime, final String Uid )
     {
