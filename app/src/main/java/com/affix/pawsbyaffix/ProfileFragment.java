@@ -477,6 +477,7 @@ public class ProfileFragment extends Fragment {
 
                 int x = recview.getLayoutManager().getPosition(v);
                 Paper.book().write("position",x);
+
                 Fragment fragment = new VerticelUprofileFragment();
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();

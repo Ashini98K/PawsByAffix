@@ -79,7 +79,7 @@ public class VerticelUprofileAdapter extends FirebaseRecyclerAdapter <VerticelUp
         });
 
 
-        final String username =  Paper.book().read("UserName");
+        final String username =  Paper.book().read("FriendFullName");
         final String profimage = Paper.book().read("ProfileImage");
         Glide.with(holder.image.getContext()).load(VerticelUprofileModel.getImage()).into(holder.image);
         holder.likes.setText(String.valueOf(VerticelUprofileModel.getLikes()));
