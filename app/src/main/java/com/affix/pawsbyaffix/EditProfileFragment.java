@@ -129,6 +129,7 @@ public class EditProfileFragment extends Fragment {
         logoutbtn = (Button) getView().findViewById(R.id.logoutbtn);
         updatebtn = (Button) getView().findViewById(R.id.updatebtn);
 
+        //Glide - Connecting a URL with the image
         Glide.with(backgroundImage.getContext()).load(bgimg).into(backgroundImage);
         Glide.with(profileImage.getContext()).load(dpimg).into(profileImage);
         fullname.setText(fullnamepp);
@@ -173,7 +174,7 @@ public class EditProfileFragment extends Fragment {
 
     private void openGallery() {
 
-        //Use the cropimage method
+        //Use the crop image method
         CropImage.activity(imageuri)
                 .start(getContext(),this);
     }
@@ -229,7 +230,7 @@ public class EditProfileFragment extends Fragment {
 
         if (TextUtils.isEmpty(usernameval))
         {
-            Toast.makeText(getActivity().getApplicationContext(),"Fullname is empty",Toast.LENGTH_LONG);
+            Toast.makeText(getActivity().getApplicationContext(),"UserName is empty",Toast.LENGTH_LONG);
         }
         else if (TextUtils.isEmpty(FullnameVal))
         {
@@ -237,7 +238,7 @@ public class EditProfileFragment extends Fragment {
         }
         else if (TextUtils.isEmpty(BioVal))
         {
-            Toast.makeText(getActivity().getApplicationContext(),"Fullname is empty",Toast.LENGTH_LONG);
+            Toast.makeText(getActivity().getApplicationContext(),"Bio is empty",Toast.LENGTH_LONG);
         }
         else{
             savePostinfo();
