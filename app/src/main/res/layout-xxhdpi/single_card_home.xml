@@ -5,6 +5,7 @@
     android:layout_height="wrap_content"
     >
     <RelativeLayout
+        android:visibility="gone"
         android:id="@+id/relcard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -60,6 +61,13 @@
                     android:textColor="@color/black"
                     android:layout_toRightOf="@+id/circle_profile_image"
                     android:text="Full name" />
+
+                <TextView
+                    android:id="@+id/userIdforpost"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="invisible"
+                    />
             </RelativeLayout>
 
 
@@ -82,8 +90,8 @@
                     <ImageView
                         android:id="@+id/post_image"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:scaleType="fitCenter"
+                        android:layout_height="200dp"
+                        android:scaleType="centerCrop"
                         android:src="@drawable/ic_launcher_background" />
 
                 </RelativeLayout>
@@ -132,6 +140,13 @@
                 android:layout_marginTop="10dp"
                 android:textSize="12sp"
                 android:text="yyy-mm-dd" />
+
+            <TextView
+                android:id="@+id/postdateid"
+                android:visibility="invisible"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
 
             <TextView
                 android:id="@+id/captionnames"

@@ -455,7 +455,7 @@ public class ProfileFragment extends Fragment {
 
         rootref.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
+            public void onDataChange(@NonNull DataSnapshot snapshot){
                 long followingcount = snapshot.getChildrenCount();
                 String flwing = String.valueOf(followingcount);
                 FollowingCountTextView.setText(flwing);
@@ -477,6 +477,7 @@ public class ProfileFragment extends Fragment {
 
                 int x = recview.getLayoutManager().getPosition(v);
                 Paper.book().write("position",x);
+
                 Fragment fragment = new VerticelUprofileFragment();
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();

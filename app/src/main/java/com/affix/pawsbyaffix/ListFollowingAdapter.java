@@ -49,15 +49,15 @@ public class ListFollowingAdapter extends FirebaseRecyclerAdapter <ListFollowing
         DatabaseReference userref = FirebaseDatabase.getInstance().getReference().child("Following").child(myUserId);
 
         userref.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                     if(snapshot.child(useruid).exists())
                     {
                         holder.followbtn.setText("Unfollow");
                     }
 
-            }
+                }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -76,8 +76,8 @@ public class ListFollowingAdapter extends FirebaseRecyclerAdapter <ListFollowing
         Glide.with(holder.bgimg.getContext()).load(ListFollowingModel.getBackgroundImage()).into(holder.bgimg);
 
         holder.followbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+                @Override
+                public void onClick(View view) {
                     DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Following").child(myUserId).child(useruid);
 
                     ref.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {

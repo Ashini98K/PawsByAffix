@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -44,6 +45,7 @@ public class VerticelUprofileAdapter extends FirebaseRecyclerAdapter <VerticelUp
     @Override
     protected void onBindViewHolder(@NonNull final myviewholder holder, int position, @NonNull final VerticelUprofileModel VerticelUprofileModel) {
 
+        holder.cardrel.setVisibility(View.VISIBLE);
         mAuth = FirebaseAuth.getInstance();
 
         holder.captionnames.setText(VerticelUprofileModel.getUsername());
@@ -197,6 +199,7 @@ public class VerticelUprofileAdapter extends FirebaseRecyclerAdapter <VerticelUp
 
         ImageView image,profileimage,liked_image_red,like_image_outline;
         TextView username,caption,likes,datetime,deletebtn,fullnamesingle,captionnames;
+        RelativeLayout cardrel;
 
 
         public myviewholder(@NonNull View itemView) {
@@ -213,6 +216,7 @@ public class VerticelUprofileAdapter extends FirebaseRecyclerAdapter <VerticelUp
             likes = (TextView) itemView.findViewById(R.id.like_count);
             datetime = (TextView) itemView.findViewById(R.id.datettime);
             deletebtn = (TextView) itemView.findViewById(R.id.deletebtn) ;
+            cardrel = (RelativeLayout) itemView.findViewById(R.id.relcard);
 
         }
 

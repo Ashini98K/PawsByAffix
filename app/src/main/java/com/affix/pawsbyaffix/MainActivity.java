@@ -55,11 +55,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.child(Uid).getChildrenCount() > 0)
-                {
-                    String count = String.valueOf(Integer.parseInt(snapshot.child("NewNotificationCount").getValue().toString())*-1);
+                {   long count = snapshot.child(Uid).getChildrenCount();
+
                     notificationRel.setBackgroundResource(R.drawable.ic_re_bell);
                     notificationtxt.setVisibility(View.VISIBLE);
-                    notificationtxt.setText(count);
+                    notificationtxt.setText(String.valueOf(count));
                 }
                 else{
                     notificationRel.setBackgroundResource(R.drawable.ic_outline_notifications);
@@ -165,8 +165,8 @@ public class MainActivity extends AppCompatActivity {
         messageLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Fragment fragment;
 
+                Fragment fragment;
                 fragment = new MessageFragment();
                 FragmentManager fm = getSupportFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();

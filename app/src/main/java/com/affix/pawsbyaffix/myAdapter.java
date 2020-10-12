@@ -20,21 +20,28 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import io.paperdb.Paper;
 
 class myAdapter extends FirebaseRecyclerAdapter<model, myAdapter.myviewholder> {
 
+    private String userIdForPost;
     DatabaseReference databaseReference;
     String fuid;
     int notificationNumber,count;
     FirebaseAuth mAuth;
     private String likecount;
+    private String postDateId;
     private boolean isfollowing =false;
     private boolean isLiked = false;
+    private String postiddate;
+    private String postuserid;
     private boolean notliked = true;
     private String likeCount,firstname,secondname;
 
@@ -52,136 +59,185 @@ class myAdapter extends FirebaseRecyclerAdapter<model, myAdapter.myviewholder> {
         fuid =  model.getUserid();
 
 
+            DatabaseReference getuserref = FirebaseDatabase.getInstance().getReference().child("Following").child(uid);
 
-
-
-        DatabaseReference getuserref = FirebaseDatabase.getInstance().getReference().child("Following").child(uid);
-
-        getuserref.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                if(snapshot.child(fuid).exists() || fuid.equals(uid))
-                {
-
-                    isfollowing = true;
-
-                }
-                else
-                {
-                    isfollowing = false;
-                   holder.cardRel.setVisibility(View.VISIBLE);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-
-        if(1==1)
-        {
-
-
-
-            Glide.with(holder.image.getContext()).load(model.getImage()).into(holder.image);
-            holder.image.setScaleType(ImageView.ScaleType.FIT_CENTER);
-            final String postuserid = model.getUserid();
-            final String postid = model.getPostiddate();
-            final String username =  Paper.book().read("UserName");
-            final String postImage = model.getImage();
-            String fullname =  Paper.book().read("FullName");
-            final String profimage = Paper.book().read("ProfileImage");
-            final String postiddate =  model.getPostiddate();
-
-            holder.username.setText(model.getUsername());
-            holder.fullname.setText(model.getFullname());
-
-            holder.captionname.setText(model.getUsername());
-            holder.datetime.setText(model.getDatetime());
-            holder.caption.setText(model.getCaption());
-
-            isfollowing = true;
-            if(model.getUserid().equals(uid))
-            {
-                holder.deletebtn.setVisibility(View.VISIBLE);
-            }
-            else
-            {
-                holder.deletebtn.setVisibility(View.INVISIBLE);
-            }
-
-
-
-            Glide.with(holder.profileimage.getContext()).load(model.getProfileimage()).into(holder.profileimage);
-
-            //Get likes count
-            databaseReference = FirebaseDatabase.getInstance().getReference().child("User_Posts").child(postuserid);
-
-            databaseReference.addValueEventListener(new ValueEventListener() {
+            getuserref.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                    likeCount = String.valueOf(snapshot.child(postid).child("liked_users").getChildrenCount());
-                    holder.likes.setText(likeCount);
-                }
+                    if (snapshot.hasChild(model.getUserid()) || uid.equals(model.getUserid())) {
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
+                        holder.cardRel.setVisibility(View.VISIBLE);
 
-                }
-            });
+                        Glide.with(holder.image.getContext()).load(model.getImage()).into(holder.image);
+                        holder.image.setScaleType(ImageView.ScaleType.FIT_CENTER);
+                        postuserid = model.getUserid();
+                        final String postid = model.getPostiddate();
+                        fuid =  model.getUserid();
+                        final String username =  Paper.book().read("UserName");
+                        final String postImage = model.getImage();
+                        String fullname =  Paper.book().read("FullName");
+                        final String profimage = Paper.book().read("ProfileImage");
+                          postiddate =  model.getPostiddate();
+
+                        holder.username.setText(model.getUsername());
+                        holder.fullname.setText(model.getFullname());
+                        holder.postdateid.setText(model.getPostiddate());
+                        holder.captionname.setText(model.getUsername());
+                        holder.datetime.setText(model.getDatetime());
+                        holder.caption.setText(model.getCaption());
+                        holder.useridforpost.setText(model.getUserid());
 
 
-            holder.deletebtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
+                        if(model.getUserid().equals(uid))
+                        {
+                            holder.deletebtn.setVisibility(View.VISIBLE);
+                        }
+                        else
+                        {
+                            holder.deletebtn.setVisibility(View.INVISIBLE);
+                        }
 
-                    DatabaseReference dbref = FirebaseDatabase.getInstance().getReference().child("Posts").child(model.getPostiddate());
 
-                    dbref.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            DatabaseReference dbref = FirebaseDatabase.getInstance().getReference().child("User_Posts").child(model.getUserid()).child(model.getPostiddate());
 
-                            dbref.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
+                        Glide.with(holder.profileimage.getContext()).load(model.getProfileimage()).into(holder.profileimage);
+
+                        //Get likes count
+                        databaseReference = FirebaseDatabase.getInstance().getReference().child("User_Posts").child(postuserid);
+
+                        databaseReference.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                                likeCount = String.valueOf(snapshot.child(postid).child("liked_users").getChildrenCount());
+                                holder.likes.setText(likeCount);
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+
+
+                        holder.deletebtn.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+
+                                DatabaseReference dbref = FirebaseDatabase.getInstance().getReference().child("Posts").child(model.getPostiddate());
+
+                                dbref.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        DatabaseReference dbref = FirebaseDatabase.getInstance().getReference().child("User_Posts").child(model.getUserid()).child(model.getPostiddate());
+
+                                        dbref.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+
+                                            }
+                                        });
+                                    }
+                                });
+                            }
+                        });
+
+                        //databaseReference = FirebaseDatabase.getInstance().getReference().child("Following").child("ids");
+                        databaseReference = FirebaseDatabase.getInstance().getReference().child("User_Posts").child(postuserid);
+
+                        databaseReference.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                                if(snapshot.child(postid).child("liked_users").hasChild(uid))
+                                {
+                                    holder.liked_image_red.setVisibility(View.VISIBLE);
+                                    holder.like_image_outline.setVisibility(View.INVISIBLE);
+                                    notliked = false;
+                                }
+                                else
+                                {
+                                    holder.liked_image_red.setVisibility(View.INVISIBLE);
+                                    holder.like_image_outline.setVisibility(View.VISIBLE);
+                                    notliked = true;
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+
+                        holder.image.setOnLongClickListener(new View.OnLongClickListener() {
+                            @Override
+                            public boolean onLongClick(View view) {
+
+                                if(holder.like_image_outline.getVisibility() == view.VISIBLE)
+                                {
+
+                                    holder.like_image_outline.setVisibility(View.INVISIBLE);
+                                    holder.liked_image_red.setVisibility(View.VISIBLE);
+                                    notliked = false;
+                                    postDateId = holder.postdateid.getText().toString();
+                                    userIdForPost = holder.useridforpost.getText().toString();
+
+                                    like(userIdForPost,postDateId,uid,username,postImage,profimage);
 
                                 }
-                            });
-                        }
-                    });
-                }
-            });
+                                else if (holder.liked_image_red.getVisibility() == view.VISIBLE){
 
-            //databaseReference = FirebaseDatabase.getInstance().getReference().child("Following").child("ids");
+                                    holder.liked_image_red.setVisibility(View.INVISIBLE);
+                                    holder.like_image_outline.setVisibility(View.VISIBLE);
+                                    notliked = true;
+                                    postDateId = holder.postdateid.getText().toString();
+                                    userIdForPost = holder.useridforpost.getText().toString();
+                                    unlike(userIdForPost,postDateId,uid);
 
+                                }
 
+                                return false;
+                            }
+                        });
 
-            databaseReference = FirebaseDatabase.getInstance().getReference().child("User_Posts").child(postuserid);
+                        holder.like_image_outline.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
 
-            databaseReference.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                if(holder.like_image_outline.getVisibility() == view.VISIBLE) {
 
+                                    holder.liked_image_red.setVisibility(View.VISIBLE);
+                                    holder.like_image_outline.setVisibility(View.INVISIBLE);
+                                    notliked = false;
+                                    postDateId = holder.postdateid.getText().toString();
+                                    userIdForPost = holder.useridforpost.getText().toString();
+                                    like(userIdForPost, postDateId, uid, username, postImage, profimage);
+                                }
+                            }
+                        });
 
+                        holder.liked_image_red.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
 
-                    if(snapshot.child(postid).child("liked_users").hasChild(uid))
-                    {
-                        holder.liked_image_red.setVisibility(View.VISIBLE);
-                        holder.like_image_outline.setVisibility(View.INVISIBLE);
-                        notliked = false;
+                                if(holder.liked_image_red.getVisibility() == view.VISIBLE)
+                                {
+
+                                    holder.like_image_outline.setVisibility(View.VISIBLE);
+                                    holder.liked_image_red.setVisibility(View.INVISIBLE);
+
+                                    notliked = true;
+                                    postDateId = holder.postdateid.getText().toString();
+                                    userIdForPost = holder.useridforpost.getText().toString();
+                                    unlike(userIdForPost,postDateId,uid);
+                                }
+                            }
+                        });
                     }
                     else
                     {
-                        holder.liked_image_red.setVisibility(View.INVISIBLE);
-                        holder.like_image_outline.setVisibility(View.VISIBLE);
-                        notliked = true;
+                        holder.cardRel.setVisibility(View.GONE);
                     }
-
                 }
 
                 @Override
@@ -190,72 +246,6 @@ class myAdapter extends FirebaseRecyclerAdapter<model, myAdapter.myviewholder> {
                 }
             });
 
-
-
-            holder.image.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View view) {
-
-
-
-                    if(holder.like_image_outline.getVisibility() == view.VISIBLE)
-                    {
-
-                        holder.like_image_outline.setVisibility(View.INVISIBLE);
-                        holder.liked_image_red.setVisibility(View.VISIBLE);
-                        notliked = false;
-                        like(fuid,postiddate,uid,username,postImage,profimage);
-
-                    }
-                    else if (holder.liked_image_red.getVisibility() == view.VISIBLE){
-
-                        holder.liked_image_red.setVisibility(View.INVISIBLE);
-                        holder.like_image_outline.setVisibility(View.VISIBLE);
-                        notliked = true;
-                        unlike(fuid,postiddate,uid);
-
-                    }
-
-                    return false;
-                }
-            });
-
-            holder.like_image_outline.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-
-                    if(holder.like_image_outline.getVisibility() == view.VISIBLE) {
-
-                        holder.liked_image_red.setVisibility(View.VISIBLE);
-                        holder.like_image_outline.setVisibility(View.INVISIBLE);
-
-                        notliked = false;
-                        like(fuid, postiddate, uid, username, postImage, profimage);
-                    }
-
-
-                }
-            });
-
-            holder.liked_image_red.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-                    if(holder.liked_image_red.getVisibility() == view.VISIBLE)
-                    {
-
-                        holder.like_image_outline.setVisibility(View.VISIBLE);
-                        holder.liked_image_red.setVisibility(View.INVISIBLE);
-
-                        notliked = true;
-                        unlike(fuid,postiddate,uid);
-
-                    }
-
-                }
-            });
-        }
 
 
     }
@@ -270,7 +260,7 @@ class myAdapter extends FirebaseRecyclerAdapter<model, myAdapter.myviewholder> {
     public class myviewholder extends RecyclerView.ViewHolder{
 
         ImageView image,profileimage,liked_image_red,like_image_outline;
-        TextView username,caption,likes,datetime,fullname,captionname,deletebtn;
+        TextView username,caption,likes,datetime,fullname,captionname,deletebtn,useridforpost,postdateid;
         RelativeLayout cardRel;
 
         public myviewholder(@NonNull View itemView) {
@@ -289,6 +279,8 @@ class myAdapter extends FirebaseRecyclerAdapter<model, myAdapter.myviewholder> {
             caption = (TextView) itemView.findViewById(R.id.caption);
             likes = (TextView) itemView.findViewById(R.id.like_count);
             datetime = (TextView) itemView.findViewById(R.id.datettime);
+            useridforpost = (TextView) itemView.findViewById(R.id.userIdforpost);
+            postdateid = (TextView) itemView.findViewById(R.id.postdateid);
 
         }
 
@@ -298,6 +290,7 @@ class myAdapter extends FirebaseRecyclerAdapter<model, myAdapter.myviewholder> {
     public int getItemCount() {
         return super.getItemCount();
     }
+
 
 
 
@@ -330,7 +323,6 @@ class myAdapter extends FirebaseRecyclerAdapter<model, myAdapter.myviewholder> {
                             if(task.isSuccessful())
                             {
 
-
                                 DatabaseReference notifyref = FirebaseDatabase.getInstance().getReference().child("Notifications");
                                 notifyref.addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
@@ -344,7 +336,6 @@ class myAdapter extends FirebaseRecyclerAdapter<model, myAdapter.myviewholder> {
                                         {
                                             notificationNumber = -1;
                                         }
-
                                         if(notificationNumber != 0 && !(uidforpost.equals(Uid)))
                                         {
                                             DatabaseReference rootref = FirebaseDatabase.getInstance().getReference().child("Notifications");
@@ -356,7 +347,7 @@ class myAdapter extends FirebaseRecyclerAdapter<model, myAdapter.myviewholder> {
                                                 @Override
                                                 public void onComplete(@NonNull Task<Void> task) {
 
-                                                    if(notificationNumber != 0)
+                                                    if(notificationNumber != 0 && uidforpost != Uid)
                                                     {
                                                         String NewNotificationMessage = username + " has liked your post";
 
@@ -374,42 +365,27 @@ class myAdapter extends FirebaseRecyclerAdapter<model, myAdapter.myviewholder> {
                                                         notifyref.updateChildren(notifMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                                                             @Override
                                                             public void onComplete(@NonNull Task<Void> task) {
-
-
-
                                                             }
 
                                                         });
                                                     }
-
-
                                                 }
                                             });
-
                                         }
-
-
-
                                     }
                                     @Override
                                     public void onCancelled(@NonNull DatabaseError error) {
                                     }
                                 });
-
-
                             }
                         }
                     });
-
-
 
 
                 }
             }
         });
     }
-
-    //remove unlike
 
     public void unlike(final String uidforpost, final String datetime, final String Uid )
     {
