@@ -230,15 +230,15 @@ public class EditProfileFragment extends Fragment {
 
         if (TextUtils.isEmpty(usernameval))
         {
-            Toast.makeText(getActivity().getApplicationContext(),"UserName is empty",Toast.LENGTH_LONG);
+            Toast.makeText(getActivity().getApplicationContext(),"UserName is empty",Toast.LENGTH_LONG).show();
         }
         else if (TextUtils.isEmpty(FullnameVal))
         {
-            Toast.makeText(getActivity().getApplicationContext(),"Fullname is empty",Toast.LENGTH_LONG);
+            Toast.makeText(getActivity().getApplicationContext(),"Fullname is empty",Toast.LENGTH_LONG).show();
         }
         else if (TextUtils.isEmpty(BioVal))
         {
-            Toast.makeText(getActivity().getApplicationContext(),"Bio is empty",Toast.LENGTH_LONG);
+            Toast.makeText(getActivity().getApplicationContext(),"Bio is empty",Toast.LENGTH_LONG).show();
         }
         else{
             savePostinfo();
@@ -274,8 +274,9 @@ public class EditProfileFragment extends Fragment {
 
                         if(ImageCode == 1)
                         {
-                            downloadprofileImageUrl = filepath.getDownloadUrl().toString();
 
+                           //passing the image link that was created during the upload to the variable
+                            downloadprofileImageUrl = filepath.getDownloadUrl().toString();
 
                         }
                         else if(ImageCode == 2)
@@ -308,14 +309,13 @@ public class EditProfileFragment extends Fragment {
                                             public void onComplete(@NonNull Task<Void> task) {
                                                 if (task.isSuccessful()) {
 
-
+                                                    //displaying a updated successfull  message for the image upload
+                                                    //And saving the image URL to the paper DB
                                                     Toast.makeText(getActivity().getApplicationContext(), "Profile Image updated", Toast.LENGTH_SHORT).show();
                                                     Paper.book().write("ProfileImage",downloadprofileImageUrl);
                                                     ImageView proflink = (ImageView)getActivity().findViewById(R.id.profileImg);
                                                     String dpimg = Paper.book().read("ProfileImage");
                                                     Glide.with(proflink.getContext()).load(dpimg).into(proflink);
-
-
 
 
                                                 } else {
